@@ -1,0 +1,145 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include_dir_merge_list automations/
+script: !include scripts.yaml
+scene: !include scenes.yaml
+sensor: !include_dir_merge_list sensors/
+# Example configuration.yaml entry
+
+input_boolean:
+  notify_home:
+    name: Water On
+    icon: mdi:water
+
+mqtt:
+  sensor:
+    - unique_id: "heating_local_temperature_heat"
+      name: "Heating Local temperature Heating"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      value_template: "{{ value_json.local_temperature_heat | round(1, 'floor') }}"
+      force_update: true
+
+    - unique_id: "heating_occupied_heating_setpoint_heat"
+      name: "Heating Occupied Heating Setpoint Heating"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json.occupied_heating_setpoint_heat }}"
+      force_update: true
+
+    - unique_id: "heating_system_mode_heat"
+      name: "Heating System Mode Heating"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      value_template: "{{ value_json.system_mode_heat }}"
+      force_update: true
+
+    - unique_id: "heating_running_state_heat"
+      name: "Heating Running State Heating"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      value_template: "{{ value_json.running_state_heat }}"
+      force_update: true
+
+    - unique_id: "heating_temperature_setpoint_hold_heat"
+      name: "Heating Temperature Setpoint Hold Heating"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      force_update: true
+      value_template: "{{ value_json.temperature_setpoint_hold_heat }}"
+
+    - unique_id: "heating_temperature_setpoint_hold_duration_heat"
+      name: "Heating Temperature Setpoint Hold Duration Heat"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      force_update: true
+      value_template: "{{ value_json.temperature_setpoint_hold_duration_heat }}"
+
+    - unique_id: "heating_local_temperature_water"
+      name: "Heating Local temperature Water"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      value_template: "{{ value_json.local_temperature_water | round(1, 'floor') }}"
+      force_update: true
+
+    - unique_id: "heating_occupied_heating_setpoint_water"
+      name: "Heating Occupied Heating Setpoint Water"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json.occupied_heating_setpoint_water }}"
+      force_update: true
+
+    - unique_id: "heating_system_mode_water"
+      name: "Heating System Mode Water"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      value_template: "{{ value_json.system_mode_water }}"
+      force_update: true
+
+    - unique_id: "heating_running_state_water"
+      name: "Heating Running State Water"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      value_template: "{{ value_json.running_state_water }}"
+      force_update: true
+
+    - unique_id: "heating_temperature_setpoint_hold_water"
+      name: "Heating Temperature Setpoint Hold Water"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      force_update: true
+      value_template: "{{ value_json.temperature_setpoint_hold_water }}"
+
+    - unique_id: "heating_temperature_setpoint_hold_duration_water"
+      name: "Heating Temperature Setpoint Hold Duration Water"
+      state_topic: "zigbee2mqtt/Boiler Control"
+      force_update: true
+      value_template: "{{ value_json.temperature_setpoint_hold_duration_water }}"
+
+
+# Climate control for use with external temperature sensor
+# generic_thermostat requires a heater output (on/off) and
+# a temperature sensor input.
+#
+# Required components (in addition to climate):
+# input_boolean.<room>_trv_open:
+# Automation <room>_trv_on_off:   
+#   Automation to set TRV temperature either really high or really low (on/off)
+#   Automation is triggered and depends on input_boolean.<room>_trv_open
+# Automation <room>_auto_temperature_automation
+#   Automation to set the temperature depending on custom sensor
+# sensor.<room>_heating_temp
+#   Custom sensor to describe a temperature schedule
+# sensor.<room>_temperature_sensor_temperature
+
+climate:
+  - platform: generic_thermostat
+    name: Polly
+    heater: input_boolean.polly_trv_open
+    target_sensor: sensor.test_temperature_sensor_temperature
+    min_temp: 10
+    max_temp: 21
+    ac_mode: false
+    target_temp: 19.5
+    cold_tolerance: 0.3
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 300
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat"
+    away_temp: 16
+    precision: 0.1
+  - platform: generic_thermostat
+    name: Bedroom
+    heater: input_boolean.bedroom_trv_open
+    target_sensor: sensor.bedroom_temperature_sensor_temperature
+    min_temp: 10
+    max_temp: 21
+    ac_mode: false
+    target_temp: 18
+    cold_tolerance: 0.1
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 300
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat"
+    away_temp: 16
+    precision: 0.1

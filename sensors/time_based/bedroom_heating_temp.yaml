@@ -1,0 +1,13 @@
+# Custom sensor describing the setpoint temperature of the central heating
+# for the current time
+- platform: template
+  sensors:
+    bedroom_heating_temp:
+      value_template: >
+        {% if (now().hour < 5) %}
+          17
+        {% elif (now().hour >= 8) and (now().hour < 20) %}
+          20
+        {% elif (now().hour >= 20) %}
+          17
+        {% endif %}

@@ -1,0 +1,16 @@
+# Custom sensor describing the setpoint brightness of the a light
+# for the current time
+# 00:00 - 04:59   10%
+# 05:00 - 22:59   100%
+# 23:00 - 23:59   10%
+- platform: template
+  sensors:
+    light_brightness_motion:
+      value_template: >
+        {% if (now().hour < 5) %}
+          10
+        {% elif (now().hour >= 5) and (now().hour < 23) %}
+          100
+        {% elif (now().hour >= 23) %}
+          10
+        {% endif %}

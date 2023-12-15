@@ -1,0 +1,158 @@
+- id: '1695984474112'
+  name: Spare Room Night Light
+  entities:
+    light.spare_bedroom_wall_light:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Spare Bedroom Wall Light
+      supported_features: 44
+      color_mode: brightness
+      brightness: 8
+      state: 'on'
+  icon: mdi:weather-night
+  metadata: {}
+- id: '1695986430052'
+  name: Living Room Bright
+  entities:
+    light.living_room_wall_light_left:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Living Room Wall Light (Left)
+      supported_features: 44
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.living_room_wall_light_right:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Living Room Wall Light (Right)
+      supported_features: 44
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+  icon: mdi:white-balance-sunny
+  metadata: {}
+- id: '1695986528795'
+  name: Living Room Dim
+  entities:
+    light.living_room_wall_light_left:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Living Room Wall Light (Left)
+      supported_features: 44
+      color_mode: brightness
+      brightness: 76
+      state: 'on'
+    light.living_room_wall_light_right:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Living Room Wall Light (Right)
+      supported_features: 44
+      color_mode: brightness
+      brightness: 76
+      state: 'on'
+  icon: mdi:theme-light-dark
+  metadata: {}
+- id: '1695986609405'
+  name: Living Room TV Lighting
+  entities:
+    light.living_room_wall_light_left:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Living Room Wall Light (Left)
+      supported_features: 44
+      state: 'off'
+    light.living_room_wall_light_right:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Living Room Wall Light (Right)
+      supported_features: 44
+      color_mode: brightness
+      brightness: 13
+      state: 'on'
+  icon: mdi:television-box
+  metadata: {}
+- id: '1696067865496'
+  name: Morning Lights
+  entities:
+    light.living_room_wall_light_left:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Living Room Wall Light (Left)
+      supported_features: 44
+      color_mode: brightness
+      brightness: 127
+      state: 'on'
+    light.living_room_wall_light_right:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Living Room Wall Light (Right)
+      supported_features: 44
+      color_mode: brightness
+      brightness: 127
+      state: 'on'
+  icon: mdi:weather-sunset-up
+  metadata: {}

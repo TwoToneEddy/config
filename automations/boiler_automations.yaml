@@ -1,0 +1,158 @@
+# Sends a boost command for hot water
+# Triggered by an input button
+# Passes input_number.hot_water_boost_time as the time
+- id: "1696685483799"
+  alias: Boost Hot Water
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.boost_hotwater_button
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        qos: "1"
+        retain: false
+        topic: zigbee2mqtt/Boiler Control/set
+        payload:
+          '{"system_mode_water":"emergency_heating","temperature_setpoint_hold_duration_water":{{states("input_number.hot_water_boost_time")}},"temperature_setpoint_hold_water":"1"
+          }'
+  mode: single
+
+# Simple schedule for turning the hot water on at set times
+# Also checks schedule is enabled by checking input_boolean.activate_water_schedule
+- id: "1696864739464"
+  alias: Hot Water Schedule Automation
+  description: Turns the water on and off depending on schedule
+  trigger:
+    - platform: state
+      entity_id:
+        - schedule.hot_water
+      from:
+    - platform: state
+      entity_id:
+        - input_boolean.activate_water_schedule
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: schedule.hot_water
+              state: "on"
+            - condition: state
+              entity_id: input_boolean.activate_water_schedule
+              state: "on"
+          sequence:
+            - service: mqtt.publish
+              data:
+                qos: 0
+                retain: false
+                topic: zigbee2mqtt/Boiler Control/set
+                payload:
+                  '{    "system_mode_water":"heat",    "temperature_setpoint_hold_water":"1"
+                  }'
+        - conditions:
+            - condition: or
+              conditions:
+                - condition: state
+                  entity_id: schedule.hot_water
+                  state: "off"
+                - condition: state
+                  entity_id: input_boolean.activate_water_schedule
+                  state: "off"
+          sequence:
+            - service: mqtt.publish
+              data:
+                qos: 0
+                retain: false
+                topic: zigbee2mqtt/Boiler Control/set
+                payload:
+                  '{    "system_mode_water":"off",    "temperature_setpoint_hold_water":"0"
+                  }'
+  mode: single
+
+- id: "1698256724192"
+  alias: Heating Schedule Automation
+  description: Turns on heating and sets temp to sensor.main_heating_temp if auto mode selected
+  trigger:
+    - platform: state
+      entity_id:
+        - input_boolean.heating_mode_auto
+    - platform: state
+      entity_id:
+        - sensor.main_heating_temp
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_boolean.heating_mode_auto
+              state: "on"
+          sequence:
+            - service: mqtt.publish
+              data:
+                qos: 1
+                retain: false
+                topic: zigbee2mqtt/Boiler Control/set
+                payload:
+                  '{"system_mode_heat":"heat","temperature_setpoint_hold_heat":"1","occupied_heating_setpoint_heat":{{states("sensor.main_heating_temp")}}
+                  }'
+        - conditions:
+            - condition: or
+              conditions:
+                - condition: state
+                  entity_id: input_boolean.heating_mode_auto
+                  state: "off"
+          sequence:
+            - service: mqtt.publish
+              data:
+                qos: 0
+                retain: false
+                topic: zigbee2mqtt/Boiler Control/set
+                payload:
+                  '{"system_mode_heat":"off","temperature_setpoint_hold_heat":"0"
+                  }'
+  mode: single
+
+- id: "1697295904731"
+  alias: Boost Heating
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.boost_heating_button
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        qos: "1"
+        topic: zigbee2mqtt/Boiler Control/set
+        payload:
+          '{    "system_mode_heat":"emergency_heating",    "temperature_setpoint_hold_duration_heat":"60",
+          "temperature_setpoint_hold_heat":"1",    "occupied_heating_setpoint_heat":"22"
+          }'
+  mode: single
+
+- id: "1697964660108"
+  alias: Change Heating Setpoint
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_number.heating_setpoint_proxy
+  condition: []
+  action:
+    - service: mqtt.publish
+      data:
+        qos: "1"
+        retain: false
+        topic: zigbee2mqtt/Boiler Control/set
+        payload:
+          '{"occupied_heating_setpoint_heat":{{states("input_number.heating_setpoint_proxy")}}
+          }'
+  mode: single
+
+
+
+

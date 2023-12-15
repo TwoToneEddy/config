@@ -1,0 +1,73 @@
+- id: '1699723711968'
+  alias: Living Room Light Motion
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.stairs_motion_sensor_occupancy
+    from:
+  condition:
+  - condition: state
+    entity_id: schedule.lighting_motion_sensor_schedule
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.stairs_motion_sensor_occupancy
+        state: 'on'
+      sequence:
+      - type: turn_on
+        device_id: a31cd6d1582876d720d62a96236c3f6b
+        entity_id: light.living_room_wall_light_right
+        domain: light
+        brightness_pct: 10
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.stairs_motion_sensor_occupancy
+        state: 'off'
+      sequence:
+      - type: turn_off
+        device_id: a31cd6d1582876d720d62a96236c3f6b
+        entity_id: light.living_room_wall_light_right
+        domain: light
+  mode: single
+
+
+- id: '1698174387526'
+  alias: Bathroom Light Motion
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bathroom_motion_sensor_occupancy
+    from:
+    to:
+  condition:
+  - condition: state
+    entity_id: schedule.bathroom_lighting_motion_sensor
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.bathroom_motion_sensor_occupancy
+        state: 'on'
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_pct: "{{ states('sensor.light_brightness_motion') }}"
+        target:
+          entity_id: light.bathroom_light
+    - conditions:
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.bathroom_motion_sensor_occupancy
+          state: 'on'
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.bathroom_light
+  mode: single

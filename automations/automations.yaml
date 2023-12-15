@@ -1,0 +1,322 @@
+- id: "1695921607162"
+  alias: DS_Cupboard_on
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.ds_cupboard_door_sensor_2_contact
+      from: "off"
+      to: "on"
+  condition: []
+  action:
+    - type: turn_on
+      device_id: e2e7eecbf8de3fc86398848b7ed9b127
+      entity_id: b9069a8e4f575b618c2a9893e698d006
+      domain: light
+  mode: single
+- id: "1695921692839"
+  alias: DS_Cupboard_off
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.ds_cupboard_door_sensor_2_contact
+      from: "on"
+      to: "off"
+  condition: []
+  action:
+    - type: turn_off
+      device_id: e2e7eecbf8de3fc86398848b7ed9b127
+      entity_id: b9069a8e4f575b618c2a9893e698d006
+      domain: light
+  mode: single
+- id: "1695984609406"
+  alias: Spare Bedroom Night Scene Button
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.spare_bedroom_night_scene
+  condition: []
+  action:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.spare_room_night_light
+      metadata: {}
+  mode: single
+- id: "1695984991678"
+  alias: Turn Off Spare Bedroom Wall Light
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.spare_bedroom_lights_off
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 54fb76a3d50d007b6058810800250a79
+      entity_id: cf8d6e23aec25ce98c166157d26776f1
+      domain: light
+  mode: single
+- id: "1695986742513"
+  alias: Brighten Living Room
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.living_room_bright
+  condition: []
+  action:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.living_room_bright
+      metadata: {}
+  mode: single
+- id: "1695986795630"
+  alias: Dim Living Room
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.living_room_dim
+  condition: []
+  action:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.living_room_dim
+      metadata: {}
+  mode: single
+- id: "1695986829681"
+  alias: TV Lighting
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.living_room_tv_lighting
+  condition: []
+  action:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.living_room_tv_lighting
+      metadata: {}
+  mode: single
+- id: "1695987443667"
+  alias: Sunset Lighting
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: "-1:00"
+  condition: []
+  action:
+    - type: turn_on
+      device_id: a31cd6d1582876d720d62a96236c3f6b
+      entity_id: c4dafb2d48ed6d226aea476c34264c90
+      domain: light
+      brightness_pct: 60
+  mode: single
+- id: "1695996225453"
+  alias: Porch Light On Before Work
+  description: ""
+  trigger:
+    - platform: time
+      at: 05:45:00
+  condition:
+    - condition: and
+      conditions:
+        - condition: sun
+          before: sunrise
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+  action:
+    - type: turn_on
+      device_id: 3610e6edf77c064fe0b5a82e218df7a4
+      entity_id: 8db3f13f578f5b0bdecfdb7eb175660f
+      domain: light
+      brightness_pct: 100
+  mode: single
+- id: "1695996449552"
+  alias: Porch Light Off at Sunrise
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunrise
+      offset: "+1:00"
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 3610e6edf77c064fe0b5a82e218df7a4
+      entity_id: 8db3f13f578f5b0bdecfdb7eb175660f
+      domain: light
+  mode: single
+- id: "1695996718802"
+  alias: Porch Light On At Sunset
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: -00:30:00
+  condition: []
+  action:
+    - type: turn_on
+      device_id: 3610e6edf77c064fe0b5a82e218df7a4
+      entity_id: 8db3f13f578f5b0bdecfdb7eb175660f
+      domain: light
+      brightness_pct: 100
+  mode: single
+- id: "1695997165728"
+  alias: Bed Automation
+  description: Turns all lights off
+  trigger:
+    - platform: time
+      at: "23:00:00"
+    - platform: state
+      entity_id:
+        - input_button.bed
+  condition: []
+  action:
+    - service: light.turn_off
+      data: {}
+      target:
+        entity_id: all
+  mode: single
+
+- id: "1696067754529"
+  alias: Living Room Lights On In Morning
+  description: ""
+  trigger:
+    - platform: time
+      at: 05:40:00
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+        - sun
+  action:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.morning_lights
+      metadata: {}
+  mode: single
+
+- id: "1696068091855"
+  alias: Morning Lights Off
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunrise
+      offset: 01:00:00
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+        - sun
+  action:
+    - type: turn_off
+      device_id: bd7a7f331b0c2f19525b85860f5d6ff6
+      entity_id: 036a26770de8d727ebb07e5c3cdcd37f
+      domain: light
+    - type: turn_off
+      device_id: a31cd6d1582876d720d62a96236c3f6b
+      entity_id: c4dafb2d48ed6d226aea476c34264c90
+      domain: light
+  mode: single
+
+- id: "1697039421046"
+  alias: Bathroom hue dimmer
+  description: ""
+  use_blueprint:
+    path: patpac9/Hue_Dimmer_Switch_Easy_Custom_Buttons.yaml
+    input:
+      controller: "Bathroom dimmer "
+      on_released:
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.toggle_bathroom_light
+      up_pressed: []
+      up_released:
+        - device_id: ab8080c66c4fcef2d95bd2cd13e4811c
+          domain: light
+          entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
+          type: brightness_increase
+      down_released:
+        - device_id: ab8080c66c4fcef2d95bd2cd13e4811c
+          domain: light
+          entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
+          type: brightness_decrease
+
+- id: "1697049622352"
+  alias: Toggle Bathroom Light
+  description: ""
+  trigger: []
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: device
+              type: is_off
+              device_id: ab8080c66c4fcef2d95bd2cd13e4811c
+              entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
+              domain: light
+          sequence:
+            - type: turn_on
+              device_id: ab8080c66c4fcef2d95bd2cd13e4811c
+              entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
+              domain: light
+              brightness_pct: 100
+        - conditions:
+            - condition: device
+              type: is_on
+              device_id: ab8080c66c4fcef2d95bd2cd13e4811c
+              entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
+              domain: light
+          sequence:
+            - type: turn_off
+              device_id: ab8080c66c4fcef2d95bd2cd13e4811c
+              entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
+              domain: light
+  mode: single
+
+- id: "Bedroom_dimmer_lee_automation"
+  alias: Bedroom dimmer lee automation
+  description: ""
+  use_blueprint:
+    path: patpac9/Hue_Dimmer_Switch_Easy_Custom_Buttons.yaml
+    input:
+      controller: Bedroom dimmer lee
+      off_released:
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.bed_automation
+
+- id: "Bedroom_dimmer_kiera_automation"
+  alias: Bedroom dimmer kiera automation
+  description: ""
+  use_blueprint:
+    path: patpac9/Hue_Dimmer_Switch_Easy_Custom_Buttons.yaml
+    input:
+      controller: Bedroom dimmer kiera
+      off_released:
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.bed_automation
