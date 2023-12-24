@@ -168,7 +168,8 @@
       domain: light
       brightness_pct: 100
   mode: single
-- id: "1695997165728"
+
+- id: "bed_automation"
   alias: Bed Automation
   description: Turns all lights off
   trigger:
@@ -179,10 +180,14 @@
         - input_button.bed
   condition: []
   action:
-    - service: light.turn_off
-      data: {}
-      target:
-        entity_id: all
+  - service: light.turn_off
+    target:
+      entity_id: all
+    data: {}
+  - type: turn_off
+    device_id: 2dc67447c8ec935a0120525fcae6e28c
+    entity_id: 86befecb6ed5d3de829cfd07fcb6a814
+    domain: switch
   mode: single
 
 - id: "1696067754529"
