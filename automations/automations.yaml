@@ -180,14 +180,14 @@
         - input_button.bed
   condition: []
   action:
-  - service: light.turn_off
-    target:
-      entity_id: all
-    data: {}
-  - type: turn_off
-    device_id: 2dc67447c8ec935a0120525fcae6e28c
-    entity_id: 86befecb6ed5d3de829cfd07fcb6a814
-    domain: switch
+    - service: light.turn_off
+      target:
+        entity_id: all
+      data: {}
+    - type: turn_off
+      device_id: 2dc67447c8ec935a0120525fcae6e28c
+      entity_id: 86befecb6ed5d3de829cfd07fcb6a814
+      domain: switch
   mode: single
 
 - id: "1696067754529"
@@ -240,88 +240,3 @@
       entity_id: c4dafb2d48ed6d226aea476c34264c90
       domain: light
   mode: single
-
-- id: "1697039421046"
-  alias: Bathroom hue dimmer
-  description: ""
-  use_blueprint:
-    path: patpac9/Hue_Dimmer_Switch_Easy_Custom_Buttons.yaml
-    input:
-      controller: "Bathroom dimmer "
-      on_released:
-        - service: automation.trigger
-          data:
-            skip_condition: true
-          target:
-            entity_id: automation.toggle_bathroom_light
-      up_pressed: []
-      up_released:
-        - device_id: ab8080c66c4fcef2d95bd2cd13e4811c
-          domain: light
-          entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
-          type: brightness_increase
-      down_released:
-        - device_id: ab8080c66c4fcef2d95bd2cd13e4811c
-          domain: light
-          entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
-          type: brightness_decrease
-
-- id: "1697049622352"
-  alias: Toggle Bathroom Light
-  description: ""
-  trigger: []
-  condition: []
-  action:
-    - choose:
-        - conditions:
-            - condition: device
-              type: is_off
-              device_id: ab8080c66c4fcef2d95bd2cd13e4811c
-              entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
-              domain: light
-          sequence:
-            - type: turn_on
-              device_id: ab8080c66c4fcef2d95bd2cd13e4811c
-              entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
-              domain: light
-              brightness_pct: 100
-        - conditions:
-            - condition: device
-              type: is_on
-              device_id: ab8080c66c4fcef2d95bd2cd13e4811c
-              entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
-              domain: light
-          sequence:
-            - type: turn_off
-              device_id: ab8080c66c4fcef2d95bd2cd13e4811c
-              entity_id: 505e22eedf9859a5fe9eb2a92825d5fc
-              domain: light
-  mode: single
-
-- id: "Bedroom_dimmer_lee_automation"
-  alias: Bedroom dimmer lee automation
-  description: ""
-  use_blueprint:
-    path: patpac9/Hue_Dimmer_Switch_Easy_Custom_Buttons.yaml
-    input:
-      controller: Bedroom dimmer lee
-      off_released:
-        - service: automation.trigger
-          data:
-            skip_condition: true
-          target:
-            entity_id: automation.bed_automation
-
-- id: "Bedroom_dimmer_kiera_automation"
-  alias: Bedroom dimmer kiera automation
-  description: ""
-  use_blueprint:
-    path: patpac9/Hue_Dimmer_Switch_Easy_Custom_Buttons.yaml
-    input:
-      controller: Bedroom dimmer kiera
-      off_released:
-        - service: automation.trigger
-          data:
-            skip_condition: true
-          target:
-            entity_id: automation.bed_automation
