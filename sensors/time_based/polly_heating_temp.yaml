@@ -2,12 +2,12 @@
 # for the current time
 - platform: template
   sensors:
-    bedroom_heating_temp:
+    polly_heating_temp:
       value_template: >
         {% if (now().hour < 8) %}
-          15
-        {% elif (now().hour >= 8) and (now().hour < 20) %}
-          20
-        {% elif (now().hour >= 20) %}
-          15
+          18
+        {% elif (now().hour >= 8) and (now().hour < 18) %}
+          19
+        {% elif (now().hour >= 18) %}
+          18
         {% endif %}

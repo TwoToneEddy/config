@@ -92,14 +92,13 @@ mqtt:
       force_update: true
       value_template: "{{ value_json.temperature_setpoint_hold_duration_water }}"
 
-
 # Climate control for use with external temperature sensor
 # generic_thermostat requires a heater output (on/off) and
 # a temperature sensor input.
 #
 # Required components (in addition to climate):
 # input_boolean.<room>_trv_open:
-# Automation <room>_trv_on_off:   
+# Automation <room>_trv_on_off:
 #   Automation to set TRV temperature either really high or really low (on/off)
 #   Automation is triggered and depends on input_boolean.<room>_trv_open
 # Automation <room>_auto_temperature_automation
@@ -121,8 +120,6 @@ climate:
     hot_tolerance: 0
     min_cycle_duration:
       seconds: 300
-    keep_alive:
-      minutes: 3
     initial_hvac_mode: "heat"
     away_temp: 16
     precision: 0.1
@@ -138,16 +135,15 @@ climate:
     hot_tolerance: 0
     min_cycle_duration:
       seconds: 300
-    keep_alive:
-      minutes: 3
     initial_hvac_mode: "heat"
     away_temp: 16
     precision: 0.1
 
 zone:
-  
   - name: Home
     latitude: 51.7826141
     longitude: -1.5118805
     radius: 100
-    icon: mdi:account-multiple    
+    icon: mdi:account-multiple
+
+customize: !include customize.yaml
