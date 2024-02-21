@@ -14,3 +14,23 @@
         {% elif (now().hour >= 23) %}
           10
         {% endif %}
+    spare_bedroom_light_brightness:
+      value_template: >
+        {% if (now().hour < 5) %}
+          10
+        {% elif (now().hour >= 5) and (now().hour < 23) %}
+          100
+        {% elif (now().hour >= 23) %}
+          10
+        {% endif %}
+    bedroom_light_brightness:
+      value_template: >
+        {% if (now().hour < 7) %}
+          10
+        {% elif (now().hour >= 7) and (now().hour < 18) %}
+          100
+        {% elif (now().hour >= 18) and (now().hour < 23) %}
+          50
+        {% elif (now().hour >= 23) %}
+          10
+        {% endif %}

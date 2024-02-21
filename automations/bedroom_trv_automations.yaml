@@ -49,6 +49,21 @@
   mode: single
 
 
+# Replace these:
+#   bedroom_trv_on_off
+#   Bedroom TRV On / Off
+#   bedroom_trv_open
+#   bedroom_trv_sonoff
+#
+# Opens TRV when commanded by input boolean but only acts if heating is on
+
+# when (input_boolean.bedroom_trv_open ==  new) or (sensor.heating_state == heating)
+#   if (sensor.heating_state == heating)
+#     if (input_boolean.bedroom_trv_open == on)
+#       openTrv()
+#     if (input_boolean.bedroom_trv_open == off)
+#       closeTrv()()
+
 - id: 'bedroom_trv_on_off'
   alias: Bedroom TRV On / Off
   description: ''
@@ -56,7 +71,15 @@
   - platform: state
     entity_id:
     - input_boolean.bedroom_trv_open
-  condition: []
+  - platform: state
+    entity_id:
+    - sensor.heating_state
+    from:
+    to: heating
+  condition:
+  - condition: state
+    entity_id: sensor.heating_state
+    state: heating
   action:
   - if:
     - condition: state
@@ -65,15 +88,19 @@
     then:
     - service: climate.set_temperature
       target:
-        device_id: bdfb1408b14157333bb474a755a0a017
+        entity_id: climate.bedroom_trv_sonoff
       data:
         temperature: 35
         hvac_mode: heat
-    else:
+  - if:
+    - condition: state
+      entity_id: input_boolean.bedroom_trv_open
+      state: 'off'
+    then:
     - service: climate.set_temperature
       target:
-        device_id: bdfb1408b14157333bb474a755a0a017
+        entity_id: climate.bedroom_trv_sonoff
       data:
-        temperature: 35
-        hvac_mode: 'off'
+        temperature: 4
+        hvac_mode: "off"
   mode: single

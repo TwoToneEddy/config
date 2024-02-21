@@ -9,7 +9,8 @@
         - service: light.toggle
           target:
             entity_id: light.spare_bedroom_wall_light
-          data: {}
+          data:
+            brightness_pct: "{{ states('sensor.spare_bedroom_light_brightness') }}"
       up_pressed: []
       up_released:
         - service: light.turn_on
@@ -24,6 +25,30 @@
             entity_id: light.spare_bedroom_wall_light
           data:
             brightness_step_pct: -10
+      up_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.spare_bedroom_wall_light
+          data:
+            brightness_pct: 100
+      on_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.spare_bedroom_wall_light
+          data:
+            brightness_pct: 100
+      down_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.spare_bedroom_wall_light
+          data:
+            brightness_pct: 10
+      off_released:
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.bed_automation_2
 
 - id: "Bedroom_dimmer_lee_automation"
   alias: Bedroom dimmer lee automation
@@ -36,25 +61,52 @@
         - service: light.toggle
           target:
             entity_id: light.bedroom_bedside_light_lee
-          data: {}
-      off_released:
-        - service: automation.trigger
           data:
-            skip_condition: true
-          target:
-            entity_id: automation.bed_automation_2
-      down_released:
-        - service: light.turn_on
-          target:
-            entity_id: light.bedroom_bedside_light_lee
-          data:
-            brightness_step_pct: -10
+            brightness_pct: "{{ states('sensor.bedroom_light_brightness') }}"
+      up_pressed: []
       up_released:
         - service: light.turn_on
           target:
             entity_id: light.bedroom_bedside_light_lee
           data:
             brightness_step_pct: 10
+      down_pressed: []
+      down_released:
+        - service: light.turn_on
+          target:
+            entity_id: light.bedroom_bedside_light_lee
+          data:
+            brightness_step_pct: -10
+      up_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.bedroom_bedside_light_lee
+          data:
+            brightness_pct: 100
+      on_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.bedroom_bedside_light_lee
+          data:
+            brightness_pct: 100
+      down_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.bedroom_bedside_light_lee
+          data:
+            brightness_pct: 10
+      off_released:
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.bed_automation_2
+      off_held:
+        - service: climate.set_temperature
+          target:
+            entity_id: climate.bedroom
+          data:
+            temperature: 10
 
 - id: "Bedroom_dimmer_kiera_automation"
   alias: Bedroom dimmer kiera automation
@@ -67,25 +119,52 @@
         - service: light.toggle
           target:
             entity_id: light.bedroom_bedside_light_lee
-          data: {}
-      off_released:
-        - service: automation.trigger
           data:
-            skip_condition: true
-          target:
-            entity_id: automation.bed_automation_2
-      down_released:
-        - service: light.turn_on
-          target:
-            entity_id: light.bedroom_bedside_light_lee
-          data:
-            brightness_step_pct: -10
+            brightness_pct: "{{ states('sensor.bedroom_light_brightness') }}"
+      up_pressed: []
       up_released:
         - service: light.turn_on
           target:
             entity_id: light.bedroom_bedside_light_lee
           data:
             brightness_step_pct: 10
+      down_pressed: []
+      down_released:
+        - service: light.turn_on
+          target:
+            entity_id: light.bedroom_bedside_light_lee
+          data:
+            brightness_step_pct: -10
+      up_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.bedroom_bedside_light_lee
+          data:
+            brightness_pct: 100
+      on_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.bedroom_bedside_light_lee
+          data:
+            brightness_pct: 100
+      down_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.bedroom_bedside_light_lee
+          data:
+            brightness_pct: 10
+      off_released:
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.bed_automation_2
+      off_held:
+        - service: climate.set_temperature
+          target:
+            entity_id: climate.bedroom
+          data:
+            temperature: 10
 
 - id: "bathroom_hue_dimmer"
   alias: Bathroom hue dimmer
@@ -99,7 +178,7 @@
           target:
             entity_id: light.bathroom_light
           data:
-            brightness: 255
+            brightness_pct: 100
       up_pressed: []
       up_released:
         - service: light.turn_on
@@ -107,9 +186,34 @@
             entity_id: light.bathroom_light
           data:
             brightness_step_pct: 10
+      down_pressed: []
       down_released:
         - service: light.turn_on
           target:
             entity_id: light.bathroom_light
           data:
             brightness_step_pct: -10
+      up_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.bathroom_light
+          data:
+            brightness_pct: 100
+      on_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.bathroom_light
+          data:
+            brightness_pct: 100
+      down_held:
+        - service: light.turn_on
+          target:
+            entity_id: light.bathroom_light
+          data:
+            brightness_pct: 10
+      off_released:
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.bed_automation_2

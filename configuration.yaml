@@ -119,7 +119,7 @@ climate:
     cold_tolerance: 0.3
     hot_tolerance: 0
     min_cycle_duration:
-      seconds: 300
+      seconds: 30
     initial_hvac_mode: "heat"
     away_temp: 16
     precision: 0.1
@@ -134,7 +134,22 @@ climate:
     cold_tolerance: 0.1
     hot_tolerance: 0
     min_cycle_duration:
-      seconds: 300
+      seconds: 30
+    initial_hvac_mode: "heat"
+    away_temp: 16
+    precision: 0.1
+  - platform: generic_thermostat
+    name: Spare Bedroom
+    heater: input_boolean.spare_bedroom_trv_open
+    target_sensor: sensor.spare_bedroom_temperature_sensor_temperature
+    min_temp: 10
+    max_temp: 21
+    ac_mode: false
+    target_temp: 18
+    cold_tolerance: 0.1
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 30
     initial_hvac_mode: "heat"
     away_temp: 16
     precision: 0.1
