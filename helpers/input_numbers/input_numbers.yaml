@@ -1,0 +1,19 @@
+# Variables to store climate temps before boost
+spare_bedroom_temperature_store:
+  name: spare bedroom temperature store
+  icon: mdi:thermometer
+  min: 0
+  max: 35
+  step: 0.1
+bedroom_temperature_store:
+  name: bedroom temperature store
+  icon: mdi:thermometer
+  min: 0
+  max: 35
+  step: 0.1
+polly_temperature_store:
+  name: polly temperature store
+  icon: mdi:thermometer
+  min: 0
+  max: 35
+  step: 0.1

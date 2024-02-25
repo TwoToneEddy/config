@@ -6,6 +6,22 @@
 #
 # Opens TRV when commanded by input boolean but only acts if heating is on
 
+- id: "spare_bedroom_auto_temperature_automation"
+  alias: spare_bedroom Auto Temperature Automation
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.spare_bedroom_heating_temp
+  condition: []
+  action:
+    - service: climate.set_temperature
+      data:
+        temperature: "{{ states('sensor.spare_bedroom_heating_temp') }}"
+      target:
+        entity_id: climate.spare_bedroom
+  mode: single
+
 # when (input_boolean.spare_bedroom_trv_open ==  new) or (sensor.heating_state == heating)
 #   if (sensor.heating_state == heating)
 #     if (input_boolean.spare_bedroom_trv_open == on)
@@ -60,4 +76,91 @@
           data:
             temperature: 4
             hvac_mode: "off"
+  mode: single
+
+- id: "spare_bedroom_boost_heating"
+  alias: Spare Bedroom Boost Heating
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.spare_bedroom_boost_heating
+  condition:
+    - condition: state
+      entity_id: input_boolean.spare_bedroom_boosting
+      state: "off"
+  action:
+    # Update status
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.spare_bedroom_boosting
+      data: {}
+
+      # Store current setpoint
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.spare_bedroom_temperature_store
+      data:
+        value: "{{state_attr('climate.spare_bedroom','temperature')}}"
+
+      # Boost temperature
+    - service: climate.set_temperature
+      data:
+        temperature: "{{ states('sensor.spare_bedroom_boost_temp') }}"
+      target:
+        entity_id: climate.spare_bedroom
+
+      # Wait
+    - delay:
+        hours: 1
+        minutes: 0
+        seconds: 0
+        milliseconds: 0
+      # Put temperature back
+    - service: climate.set_temperature
+      target:
+        entity_id: climate.spare_bedroom
+      data:
+        temperature: "{{states('input_number.spare_bedroom_temperature_store')}}"
+
+      # Update status
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.spare_bedroom_boosting
+      data: {}
+
+  mode: single
+
+- id: "spare_bedroom_cancel_boost"
+  alias: Spare bedroom cancel boost
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.spare_bedroom_cancel_boost_heating
+  condition:
+    - condition: state
+      entity_id: input_boolean.spare_bedroom_boosting
+      state: "on"
+  action:
+    - service: automation.turn_off
+      target:
+        entity_id: automation.spare_bedroom_boost_heating
+      data:
+        stop_actions: true
+        # Update status
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.spare_bedroom_boosting
+      data: {}
+    - service: automation.turn_on
+      target:
+        entity_id: automation.spare_bedroom_boost_heating
+      data: {}
+      # Put temperature back
+    - service: climate.set_temperature
+      target:
+        entity_id: climate.spare_bedroom
+      data:
+        temperature: "{{states('input_number.spare_bedroom_temperature_store')}}"
   mode: single

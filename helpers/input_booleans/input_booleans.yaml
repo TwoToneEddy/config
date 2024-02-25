@@ -1,0 +1,42 @@
+# Flag to stop valve moving when heating is not on
+bedroom_trv_monitor_heating:
+  name: bedroom trv monitor heating
+  icon: mdi:eye
+  initial: on
+polly_trv_monitor_heating:
+  name: polly trv monitor heating
+  icon: mdi:eye
+  initial: on
+spare_bedroom_trv_monitor_heating:
+  name: spare bedroom trv monitor heating
+  icon: mdi:eye
+  initial: on
+
+# Bedroom boosting indicators
+bedroom_boosting:
+  name: bedroom boosting
+  icon: mdi:heat-wave
+  initial: off
+polly_boosting:
+  name: polly boosting
+  icon: mdi:heat-wave
+  initial: off
+spare_bedroom_boosting:
+  name: spare bedroom boosting
+  icon: mdi:heat-wave
+  initial: off
+
+# Triggers for climate entities to open valves
+# triggers XXXX_trv_on_off automations
+bedroom_trv_open:
+  name: Bedroom TRV Open
+  icon: mdi:valve-open
+  initial: off
+polly_trv_open:
+  name: Polly TRV Open
+  icon: mdi:valve-open
+  initial: off
+spare_bedroom_trv_open:
+  name: Spare Bedroom TRV Open
+  icon: mdi:valve-open
+  initial: off

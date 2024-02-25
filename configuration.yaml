@@ -10,6 +10,9 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 sensor: !include_dir_merge_list sensors/
 
+input_boolean: !include_dir_merge_named helpers/input_booleans
+input_button: !include_dir_merge_named helpers/input_buttons
+input_number: !include_dir_merge_named helpers/input_numbers
 # Example configuration.yaml entry
 
 mqtt:
@@ -158,9 +161,8 @@ zone:
     icon: mdi:account-multiple
 
 customize: !include customize.yaml
-
-input_boolean:
-  spare_bedroom_trv_monitor_heating:
-    name: spare bedroom trv monitor heating
-    icon: mdi:eye
-    initial: on
+# input_boolean:
+#   spare_bedroom_trv_monitor_heating:
+#     name: spare bedroom trv monitor heating
+#     icon: mdi:eye
+#     initial: on

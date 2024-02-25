@@ -55,7 +55,23 @@
     - platform: state
       entity_id:
         - input_boolean.polly_trv_open
-  condition: []
+    - platform: state
+      entity_id:
+        - input_boolean.polly_trv_monitor_heating
+    - platform: state
+      entity_id:
+        - sensor.heating_state
+      from:
+      to: heating
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.heating_state
+          state: heating
+        - condition: state
+          entity_id: input_boolean.polly_trv_monitor_heating
+          state: "off"
   action:
     - if:
         - condition: state
@@ -64,15 +80,19 @@
       then:
         - service: climate.set_temperature
           target:
-            device_id: e7e343b474074f82fe8cb569a08553f9
+            entity_id: climate.polly_trv_sonoff
           data:
             temperature: 35
             hvac_mode: heat
-      else:
+    - if:
+        - condition: state
+          entity_id: input_boolean.polly_trv_open
+          state: "off"
+      then:
         - service: climate.set_temperature
           target:
-            device_id: e7e343b474074f82fe8cb569a08553f9
+            entity_id: climate.polly_trv_sonoff
           data:
-            temperature: 35
+            temperature: 4
             hvac_mode: "off"
   mode: single

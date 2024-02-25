@@ -1,0 +1,22 @@
+# Room boost buttons
+# Triggers XXX_boost_heating automations
+spare_bedroom_boost_heating:
+  name: spare bedroom boost heating
+  icon: mdi:heat-wave
+bedroom_boost_heating:
+  name: bedroom boost heating
+  icon: mdi:heat-wave
+polly_boost_heating:
+  name: polly boost heating
+  icon: mdi:heat-wave
+
+
+spare_bedroom_cancel_boost_heating:
+  name: spare bedroom cancel boost heating
+  icon: mdi:cancel
+bedroom_cancel_boost_heating:
+  name: bedroom cancel boost heating
+  icon: mdi:cancel
+polly_cancel_boost_heating:
+  name: polly cancel boost heating
+  icon: mdi:cancel

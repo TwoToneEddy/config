@@ -2,42 +2,46 @@
 # for the current time
 - platform: template
   sensors:
-    bedroom_heating_temp:
+    spare_bedroom_heating_temp:
       value_template: >
         {% if (now().hour < 8) %}
           15
         {% elif (now().hour >= 8) and (now().hour < 20) %}
-          20
+          18
         {% elif (now().hour >= 20) %}
           15
         {% endif %}
-    bedroom_valve_dmd:
+    spare_bedroom_boost_temp:
       value_template: >
-        {% set valve_command = states('input_boolean.bedroom_trv_open') %}
+        {{ state_attr('climate.spare_bedroom','current_temperature') |float + 1 | float }}
+    spare_bedroom_valve_dmd:
+      value_template: >
+        {% set valve_command = states('input_boolean.spare_bedroom_trv_open') %}
         {% if valve_command == 'on' %}
           Open
         {% else %}
           Closed
         {% endif %}
       icon_template: >
-        {% set valve_command = states('input_boolean.bedroom_trv_open') %}
+        {% set valve_command = states('input_boolean.spare_bedroom_trv_open') %}
         {% if valve_command == 'on' %}
           mdi:valve-open
         {% else %}
           mdi:valve-closed
         {% endif %}
-    bedroom_valve_rbv:
+    spare_bedroom_valve_rbv:
       value_template: >
-        {% set valve_rbv = state_attr('climate.bedroom_trv_sonoff','hvac_action') %}
+        {% set valve_rbv = state_attr('climate.spare_bedroom_trv_sonoff','hvac_action') %}
         {% if valve_rbv == 'off' %}
           Closed
         {% else %}
           Open
         {% endif %}
       icon_template: >
-        {% set valve_rbv = state_attr('climate.bedroom_trv_sonoff','hvac_action') %}
+        {% set valve_rbv = state_attr('climate.spare_bedroom_trv_sonoff','hvac_action') %}
         {% if valve_rbv == 'off' %}
           mdi:valve-closed
         {% else %}
           mdi:valve-open
         {% endif %}
+

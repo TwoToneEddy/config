@@ -11,3 +11,33 @@
         {% elif (now().hour >= 18) %}
           18
         {% endif %}
+    polly_valve_dmd:
+      value_template: >
+        {% set valve_command = states('input_boolean.polly_trv_open') %}
+        {% if valve_command == 'on' %}
+          Open
+        {% else %}
+          Closed
+        {% endif %}
+      icon_template: >
+        {% set valve_command = states('input_boolean.polly_trv_open') %}
+        {% if valve_command == 'on' %}
+          mdi:valve-open
+        {% else %}
+          mdi:valve-closed
+        {% endif %}
+    polly_valve_rbv:
+      value_template: >
+        {% set valve_rbv = state_attr('climate.polly_trv_sonoff','hvac_action') %}
+        {% if valve_rbv == 'off' %}
+          Closed
+        {% else %}
+          Open
+        {% endif %}
+      icon_template: >
+        {% set valve_rbv = state_attr('climate.polly_trv_sonoff','hvac_action') %}
+        {% if valve_rbv == 'off' %}
+          mdi:valve-closed
+        {% else %}
+          mdi:valve-open
+        {% endif %}
