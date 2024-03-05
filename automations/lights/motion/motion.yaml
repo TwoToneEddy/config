@@ -1,11 +1,48 @@
-- id: '1699723711968'
+# - id: '1699723711968'
+#   alias: Living Room Light Motion
+#   description: ''
+#   trigger:
+#   - platform: state
+#     entity_id:
+#     - binary_sensor.stairs_motion_sensor_occupancy
+#     from:
+#   condition:
+#   - condition: state
+#     entity_id: schedule.lighting_motion_sensor_schedule
+#     state: 'on'
+#   action:
+#   - choose:
+#     - conditions:
+#       - condition: state
+#         entity_id: binary_sensor.stairs_motion_sensor_occupancy
+#         state: 'on'
+#       sequence:
+#       - type: turn_on
+#         device_id: a31cd6d1582876d720d62a96236c3f6b
+#         entity_id: light.living_room_wall_light_right
+#         domain: light
+#         brightness_pct: 10
+#     - conditions:
+#       - condition: state
+#         entity_id: binary_sensor.stairs_motion_sensor_occupancy
+#         state: 'off'
+#       sequence:
+#       - type: turn_off
+#         device_id: a31cd6d1582876d720d62a96236c3f6b
+#         entity_id: light.living_room_wall_light_right
+#         domain: light
+#   mode: single
+
+- id: '1709664072745'
   alias: Living Room Light Motion
   description: ''
   trigger:
   - platform: state
     entity_id:
     - binary_sensor.stairs_motion_sensor_occupancy
-    from:
+  - platform: state
+    entity_id:
+    - binary_sensor.tuya_motion_1_occupancy
   condition:
   - condition: state
     entity_id: schedule.lighting_motion_sensor_schedule
@@ -13,25 +50,51 @@
   action:
   - choose:
     - conditions:
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.stairs_motion_sensor_occupancy
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.tuya_motion_1_occupancy
+          state: 'on'
       - condition: state
-        entity_id: binary_sensor.stairs_motion_sensor_occupancy
-        state: 'on'
-      sequence:
-      - type: turn_on
-        device_id: a31cd6d1582876d720d62a96236c3f6b
         entity_id: light.living_room_wall_light_right
-        domain: light
-        brightness_pct: 10
-    - conditions:
-      - condition: state
-        entity_id: binary_sensor.stairs_motion_sensor_occupancy
         state: 'off'
       sequence:
-      - type: turn_off
-        device_id: a31cd6d1582876d720d62a96236c3f6b
-        entity_id: light.living_room_wall_light_right
-        domain: light
+      - service: light.turn_on
+        target:
+          entity_id: light.living_room_wall_light_right
+        data:
+          brightness_pct: 10
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.livingroom_motion_latch
+        data: {}
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.stairs_motion_sensor_occupancy
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.tuya_motion_1_occupancy
+          state: 'off'
+      - condition: state
+        entity_id: input_boolean.livingroom_motion_latch
+        state: 'on'
+      sequence:
+      - service: light.turn_off
+        target:
+          entity_id: light.living_room_wall_light_right
+        data: {}
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.livingroom_motion_latch
+        data: {}
   mode: single
+
+
 
 
 - id: '1698174387526'

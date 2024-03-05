@@ -40,3 +40,8 @@ spare_bedroom_trv_open:
   name: Spare Bedroom TRV Open
   icon: mdi:valve-open
   initial: off
+
+livingroom_motion_latch:
+  name: Living room motion latch
+  icon: mdi:flash-alert
+  initial: off
