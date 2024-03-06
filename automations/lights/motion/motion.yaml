@@ -43,6 +43,9 @@
   - platform: state
     entity_id:
     - binary_sensor.tuya_motion_1_occupancy
+  - platform: state
+    entity_id:
+    - binary_sensor.tuya_motion_2_occupancy
   condition:
   - condition: state
     entity_id: schedule.lighting_motion_sensor_schedule
@@ -57,6 +60,9 @@
           state: 'on'
         - condition: state
           entity_id: binary_sensor.tuya_motion_1_occupancy
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.tuya_motion_2_occupancy
           state: 'on'
       - condition: state
         entity_id: light.living_room_wall_light_right
@@ -80,6 +86,9 @@
         - condition: state
           entity_id: binary_sensor.tuya_motion_1_occupancy
           state: 'off'
+        - condition: state
+          entity_id: binary_sensor.tuya_motion_2_occupancy
+          state: 'off'
       - condition: state
         entity_id: input_boolean.livingroom_motion_latch
         state: 'on'
@@ -94,6 +103,21 @@
         data: {}
   mode: single
 
+- id: '1709670592462'
+  alias: Reset living room motion latch
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.living_room_wall_light_right
+    to: 'off'
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.livingroom_motion_latch
+    data: {}
+  mode: single
 
 
 

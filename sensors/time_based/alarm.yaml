@@ -1,0 +1,7 @@
+# Custom sensor describing the setpoint temperature of the central heating
+# for the current time
+- platform: template
+  sensors:
+    lees_phone_next_alarm:
+      value_template: >
+        {{ state_attr('sensor.pixel_6_next_alarm','Local Time').split()[3]}}
