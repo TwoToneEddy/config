@@ -17,3 +17,10 @@ polly_temperature_store:
   min: 0
   max: 35
   step: 0.1
+pre_alarm_seconds:
+  name: Pre alarm seconds
+  icon: mdi:timer
+  min: 0
+  max: 3600
+  step: 1
+  initial: 600

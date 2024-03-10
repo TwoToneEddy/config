@@ -1,0 +1,83 @@
+# Gets actual time of next alarm from phone
+- id: "1709752231187"
+  alias: get alarm
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.lees_phone_next_alarm
+  condition: []
+  action:
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 1
+        milliseconds: 0
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.lees_alarm
+      data:
+        time: "{{ states('sensor.lees_phone_next_alarm') }}"
+  mode: single
+
+# Subtracts a time from the alarm to allow lights to turn on before
+- id: '1709755686986'
+  alias: set pre alarm
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_datetime.lees_alarm
+  condition: []
+  action:
+  - service: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.lees_alarm_pre
+    data:
+      timestamp: "{{ (state_attr('input_datetime.lees_alarm', 'timestamp') - 4200) }}"
+  mode: single
+
+# Gradually turns on bedside light before alarm
+- id: "1709752925082"
+  alias: Bedroom Wake Up Light
+  description: ""
+  trigger:
+    - platform: time
+      at: input_datetime.lees_alarm_pre
+  condition:
+    - condition: state
+      entity_id: sensor.alarm_is_today
+      state: 'True'
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.bedroom_bedside_light_lee
+      data:
+        brightness_pct: 1
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 2
+        milliseconds: 0
+    - service: light.turn_on
+      target:
+        entity_id: light.bedroom_bedside_light_lee
+      data:
+        brightness_pct: 100
+        transition: 600
+  mode: single
+
+- id: '1709756295341'
+  alias: Turn off bedside light on sunrise
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: 0
+  condition: []
+  action:
+  - service: light.turn_off
+    target:
+      entity_id: light.bedroom_bedside_light_lee
+    data: {}
+  mode: single

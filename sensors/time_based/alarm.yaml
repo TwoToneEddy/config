@@ -5,3 +5,10 @@
     lees_phone_next_alarm:
       value_template: >
         {{ state_attr('sensor.pixel_6_next_alarm','Local Time').split()[3]}}
+    alarm_is_today:
+      value_template: >
+        {% if state_attr('sensor.pixel_6_next_alarm','Local Time').split()[2] | int == now().day %}
+        True
+        {% else %}
+        False
+        {% endif %}
