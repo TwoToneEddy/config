@@ -1,0 +1,11 @@
+- platform: template
+  sensors:
+    polly_music_volume:
+      value_template: >
+        {% if (now().hour < 18) %}
+          0.15
+        {% elif (now().hour >= 18) and (now().hour < 23) %}
+          0.25
+        {% elif (now().hour >= 23) %}
+          0.15
+        {% endif %}

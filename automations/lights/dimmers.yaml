@@ -49,6 +49,17 @@
             skip_condition: true
           target:
             entity_id: automation.bed_automation_2
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.stop_polly_music
+      off_held:
+        - service: climate.set_temperature
+          target:
+            entity_id: climate.spare_bedroom
+          data:
+            temperature: 10
 
 - id: "Bedroom_dimmer_lee_automation"
   alias: Bedroom dimmer lee automation
@@ -69,14 +80,14 @@
           target:
             entity_id: light.bedroom_bedside_light_lee
           data:
-            brightness_step_pct: 1
+            brightness_step_pct: 10
       down_pressed: []
       down_released:
         - service: light.turn_on
           target:
             entity_id: light.bedroom_bedside_light_lee
           data:
-            brightness_step_pct: -1
+            brightness_step_pct: -10
       up_held:
         - service: light.turn_on
           target:
@@ -101,6 +112,11 @@
             skip_condition: true
           target:
             entity_id: automation.bed_automation_2
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.stop_polly_music
       off_held:
         - service: climate.set_temperature
           target:
@@ -159,6 +175,11 @@
             skip_condition: true
           target:
             entity_id: automation.bed_automation_2
+        - service: automation.trigger
+          data:
+            skip_condition: true
+          target:
+            entity_id: automation.stop_polly_music
       off_held:
         - service: climate.set_temperature
           target:
@@ -217,5 +238,3 @@
             skip_condition: true
           target:
             entity_id: automation.bed_automation_2
-
-
