@@ -9,3 +9,6 @@
         {% elif (now().hour >= 23) %}
           0.15
         {% endif %}
+    polly_music_automation_current:
+      value_template: >
+        {{state_attr('automation.polly_bedtime_music_2','current')}}

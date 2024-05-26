@@ -1,22 +1,28 @@
-
 - id: "polly_bedtime_music"
   alias: Polly bedtime music
   description: ""
   trigger:
     - platform: state
       entity_id:
-        - schedule.polly_music_schedule
+        - binary_sensor.tuya_motion_3_occupancy
       to: "on"
+    # - platform: state
+    #   entity_id:
+    #     - schedule.polly_music_schedule
+    #   to: "on"
   condition:
     - condition: state
       entity_id: input_boolean.enable_polly_music
+      state: "on"
+    - condition: state
+      entity_id: schedule.polly_music_schedule
       state: "on"
   action:
     - service: media_player.volume_set
       target:
         entity_id: media_player.living_room_speaker
       data:
-        volume_level: 0.25
+        volume_level: 0.15
     - repeat:
         sequence:
           - service: media_player.play_media
@@ -25,29 +31,60 @@
             data:
               #media_content_id: media-source://media_source/local/enyaShort.mp3
               media_content_id: media-source://media_source/local/04 - Caribbean Blue.mp3
+              #media_content_id: media-source://media_source/local/lanterns1.mp3
               media_content_type: audio/mpeg
-            metadata:
-              #title: enyaShort.mp3
-              title: 04 - Caribbean Blue.mp3
-              thumbnail:
-              media_class: music
-              children_media_class:
-              navigateIds:
-                - {}
-                - media_content_type: app
-                  media_content_id: media-source://media_source
           - delay:
               hours: 0
               minutes: 0
               seconds: 2
               milliseconds: 0
           - wait_for_trigger:
-            - platform: state
-              entity_id:
-              - media_player.living_room_speaker
-              from: playing
-              to: idle
+              - platform: state
+                entity_id:
+                  - media_player.living_room_speaker
+                from: playing
+                to: idle
             continue_on_timeout: false
+          # - service: media_player.play_media
+          #   target:
+          #     entity_id: media_player.living_room_speaker
+          #   data:
+          #     #media_content_id: media-source://media_source/local/enyaShort.mp3
+          #     # media_content_id: media-source://media_source/local/04 - Caribbean Blue.mp3
+          #     media_content_id: media-source://media_source/local/lanterns2.mp3
+          #     media_content_type: audio/mpeg
+          # - delay:
+          #     hours: 0
+          #     minutes: 0
+          #     seconds: 2
+          #     milliseconds: 0
+          # - wait_for_trigger:
+          #   - platform: state
+          #     entity_id:
+          #     - media_player.living_room_speaker
+          #     from: playing
+          #     to: idle
+          #   continue_on_timeout: false
+          # - service: media_player.play_media
+          #   target:
+          #     entity_id: media_player.living_room_speaker
+          #   data:
+          #     #media_content_id: media-source://media_source/local/enyaShort.mp3
+          #     # media_content_id: media-source://media_source/local/04 - Caribbean Blue.mp3
+          #     media_content_id: media-source://media_source/local/lanterns3.mp3
+          #     media_content_type: audio/mpeg
+          # - delay:
+          #     hours: 0
+          #     minutes: 0
+          #     seconds: 2
+          #     milliseconds: 0
+          # - wait_for_trigger:
+          #   - platform: state
+          #     entity_id:
+          #     - media_player.living_room_speaker
+          #     from: playing
+          #     to: idle
+          #   continue_on_timeout: false
         until:
           - condition: or
             conditions:

@@ -49,11 +49,6 @@
             skip_condition: true
           target:
             entity_id: automation.bed_automation_2
-        - service: automation.trigger
-          data:
-            skip_condition: true
-          target:
-            entity_id: automation.stop_polly_music
       off_held:
         - service: climate.set_temperature
           target:
@@ -112,11 +107,6 @@
             skip_condition: true
           target:
             entity_id: automation.bed_automation_2
-        - service: automation.trigger
-          data:
-            skip_condition: true
-          target:
-            entity_id: automation.stop_polly_music
       off_held:
         - service: climate.set_temperature
           target:
@@ -175,11 +165,6 @@
             skip_condition: true
           target:
             entity_id: automation.bed_automation_2
-        - service: automation.trigger
-          data:
-            skip_condition: true
-          target:
-            entity_id: automation.stop_polly_music
       off_held:
         - service: climate.set_temperature
           target:

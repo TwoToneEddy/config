@@ -46,6 +46,11 @@ livingroom_motion_latch:
   icon: mdi:flash-alert
   initial: off
 
+bathroom_motion_latch:
+  name: Bathroom motion latch
+  icon: mdi:flash-alert
+  initial: off
+
 # Latch to prevent wakeup routine happening when alarm snoozed
 wake_up_routine_complete:
   name: wake up routine complete

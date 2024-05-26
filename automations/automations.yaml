@@ -183,6 +183,11 @@
       target:
         entity_id: all
       data: {}
+    - service: media_player.volume_set
+      target:
+        entity_id: media_player.living_room_speaker
+      data:
+        volume_level: 0.13
   mode: single
 
 - id: "1696067754529"

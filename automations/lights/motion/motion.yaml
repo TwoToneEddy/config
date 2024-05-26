@@ -140,21 +140,51 @@
       - condition: state
         entity_id: binary_sensor.bathroom_motion_sensor_occupancy
         state: 'on'
+      - condition: state
+        entity_id: light.bathroom_light
+        state: 'off'
       sequence:
       - service: light.turn_on
         data:
           brightness_pct: "{{ states('sensor.light_brightness_motion') }}"
         target:
           entity_id: light.bathroom_light
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.bathroom_motion_latch
+        data: {}
     - conditions:
       - condition: not
         conditions:
         - condition: state
           entity_id: binary_sensor.bathroom_motion_sensor_occupancy
           state: 'on'
+      - condition: state
+        entity_id: input_boolean.bathroom_motion_latch
+        state: 'on'
       sequence:
       - service: light.turn_off
         data: {}
         target:
           entity_id: light.bathroom_light
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.bathroom_motion_latch
+        data: {}
+  mode: single
+
+- id: 'reset_bathroom_motion_latch'
+  alias: Reset bathroom motion latch
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.bathroom_light
+    to: 'off'
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.bathroom_motion_latch
+    data: {}
   mode: single

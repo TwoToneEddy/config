@@ -1,0 +1,4 @@
+enable_polly_music:
+  name: enable polly music
+  icon: mdi:multimedia
+  initial: on
