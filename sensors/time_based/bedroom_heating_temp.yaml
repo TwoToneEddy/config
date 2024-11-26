@@ -7,9 +7,9 @@
         {% if (now().hour < 8) %}
           15
         {% elif (now().hour >= 8) and (now().hour < 20) %}
-          17
+          21
         {% elif (now().hour >= 20) %}
-          15
+          18
         {% endif %}
     bedroom_valve_dmd:
       value_template: >

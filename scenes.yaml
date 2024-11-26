@@ -31,10 +31,11 @@
       - stop_effect
       supported_color_modes:
       - brightness
-      friendly_name: Living Room Wall Light (Left)
-      supported_features: 44
       color_mode: brightness
       brightness: 255
+      effect:
+      friendly_name: Living Room Wall Light (Left)
+      supported_features: 44
       state: 'on'
     light.living_room_wall_light_right:
       effect_list:
@@ -46,13 +47,53 @@
       - stop_effect
       supported_color_modes:
       - brightness
-      friendly_name: Living Room Wall Light (Right)
-      supported_features: 44
       color_mode: brightness
       brightness: 255
+      effect:
+      friendly_name: Living Room Wall Light (Right)
+      supported_features: 44
+      state: 'on'
+    light.fire_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: color_temp
+      brightness: 153
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      effect:
+      entity_id:
+      - light.fire_light_1
+      - light.fire_light_2
+      icon: mdi:lightbulb-group
+      friendly_name: Fire light
+      supported_features: 44
       state: 'on'
   icon: mdi:white-balance-sunny
-  metadata: {}
+  metadata:
+    light.fire_light:
+      entity_only: true
 - id: '1695986528795'
   name: Living Room Dim
   entities:
@@ -66,10 +107,11 @@
       - stop_effect
       supported_color_modes:
       - brightness
-      friendly_name: Living Room Wall Light (Left)
-      supported_features: 44
       color_mode: brightness
       brightness: 76
+      effect:
+      friendly_name: Living Room Wall Light (Left)
+      supported_features: 44
       state: 'on'
     light.living_room_wall_light_right:
       effect_list:
@@ -81,13 +123,53 @@
       - stop_effect
       supported_color_modes:
       - brightness
-      friendly_name: Living Room Wall Light (Right)
-      supported_features: 44
       color_mode: brightness
       brightness: 76
+      effect:
+      friendly_name: Living Room Wall Light (Right)
+      supported_features: 44
+      state: 'on'
+    light.fire_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: color_temp
+      brightness: 82
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      effect:
+      entity_id:
+      - light.fire_light_1
+      - light.fire_light_2
+      icon: mdi:lightbulb-group
+      friendly_name: Fire light
+      supported_features: 44
       state: 'on'
   icon: mdi:theme-light-dark
-  metadata: {}
+  metadata:
+    light.fire_light:
+      entity_only: true
 - id: '1695986609405'
   name: Living Room TV Lighting
   entities:
@@ -101,6 +183,9 @@
       - stop_effect
       supported_color_modes:
       - brightness
+      color_mode:
+      brightness:
+      effect:
       friendly_name: Living Room Wall Light (Left)
       supported_features: 44
       state: 'off'
@@ -114,13 +199,53 @@
       - stop_effect
       supported_color_modes:
       - brightness
-      friendly_name: Living Room Wall Light (Right)
-      supported_features: 44
       color_mode: brightness
       brightness: 13
+      effect:
+      friendly_name: Living Room Wall Light (Right)
+      supported_features: 44
+      state: 'on'
+    light.fire_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: color_temp
+      brightness: 3
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      effect:
+      entity_id:
+      - light.fire_light_1
+      - light.fire_light_2
+      icon: mdi:lightbulb-group
+      friendly_name: Fire light
+      supported_features: 44
       state: 'on'
   icon: mdi:television-box
-  metadata: {}
+  metadata:
+    light.fire_light:
+      entity_only: true
 - id: '1696067865496'
   name: Morning Lights
   entities:

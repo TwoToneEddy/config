@@ -5,11 +5,11 @@
     polly_heating_temp:
       value_template: >
         {% if (now().hour < 8) %}
-          18
+          20
         {% elif (now().hour >= 8) and (now().hour < 18) %}
-          19
-        {% elif (now().hour >= 18) %}
-          18
+          20
+        {% elif (now().hour >= 17) %}
+          20
         {% endif %}
     polly_valve_dmd:
       value_template: >

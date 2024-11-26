@@ -1,3 +1,21 @@
+- id: "stuck_valve_fudge2"
+  alias: Stuck Valve Fudge2
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.heating_state
+      from: heating
+      to: "off"
+  condition: []
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.spare_bedroom_wall_light
+      data:
+        brightness_pct: "{{ states('sensor.spare_bedroom_light_brightness') }}"
+  mode: single
+
 # Sends a boost command for hot water
 # Triggered by an input button
 # Passes input_number.hot_water_boost_time as the time
@@ -152,7 +170,3 @@
           '{"occupied_heating_setpoint_heat":{{states("input_number.heating_setpoint_proxy")}}
           }'
   mode: single
-
-
-
-

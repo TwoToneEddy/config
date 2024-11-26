@@ -5,11 +5,11 @@
     spare_bedroom_heating_temp:
       value_template: >
         {% if (now().hour < 8) %}
-          15
-        {% elif (now().hour >= 8) and (now().hour < 20) %}
           18
+        {% elif (now().hour >= 8) and (now().hour < 20) %}
+          21
         {% elif (now().hour >= 20) %}
-          15
+          18
         {% endif %}
     spare_bedroom_boost_temp:
       value_template: >

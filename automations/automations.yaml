@@ -115,58 +115,7 @@
       domain: light
       brightness_pct: 60
   mode: single
-- id: "1695996225453"
-  alias: Porch Light On Before Work
-  description: ""
-  trigger:
-    - platform: time
-      at: 05:45:00
-  condition:
-    - condition: and
-      conditions:
-        - condition: sun
-          before: sunrise
-        - condition: time
-          weekday:
-            - mon
-            - tue
-            - wed
-            - thu
-  action:
-    - type: turn_on
-      device_id: 3610e6edf77c064fe0b5a82e218df7a4
-      entity_id: 8db3f13f578f5b0bdecfdb7eb175660f
-      domain: light
-      brightness_pct: 100
-  mode: single
-- id: "1695996449552"
-  alias: Porch Light Off at Sunrise
-  description: ""
-  trigger:
-    - platform: sun
-      event: sunrise
-  condition: []
-  action:
-    - type: turn_off
-      device_id: 3610e6edf77c064fe0b5a82e218df7a4
-      entity_id: 8db3f13f578f5b0bdecfdb7eb175660f
-      domain: light
-  mode: single
-- id: "1695996718802"
-  alias: Porch Light On At Sunset
-  description: ""
-  trigger:
-    - platform: sun
-      event: sunset
-      offset: "+01:30:00"
-  condition: []
-  action:
-    - type: turn_on
-      device_id: 3610e6edf77c064fe0b5a82e218df7a4
-      entity_id: 8db3f13f578f5b0bdecfdb7eb175660f
-      domain: light
-      brightness_pct: 100
-  mode: single
+
 
 - id: "bed_automation"
   alias: Bed Automation
@@ -194,8 +143,11 @@
   alias: Living Room Lights On In Morning
   description: ""
   trigger:
-    - platform: time
-      at: 05:40:00
+    - platform: state
+      entity_id:
+      - schedule.living_room_morning_lights
+      from: 'off'
+      to: 'on'
   condition:
     - condition: time
       weekday:
@@ -231,14 +183,6 @@
         - sat
         - sun
   action:
-    - type: turn_off
-      device_id: bd7a7f331b0c2f19525b85860f5d6ff6
-      entity_id: 036a26770de8d727ebb07e5c3cdcd37f
-      domain: light
-    - type: turn_off
-      device_id: a31cd6d1582876d720d62a96236c3f6b
-      entity_id: c4dafb2d48ed6d226aea476c34264c90
-      domain: light
     - service: light.turn_off
       target:
         entity_id: light.bedroom_bedside_light_lee

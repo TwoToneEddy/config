@@ -112,7 +112,7 @@ climate:
     heater: input_boolean.polly_trv_open
     target_sensor: sensor.test_temperature_sensor_temperature
     min_temp: 10
-    max_temp: 21
+    max_temp: 24
     ac_mode: false
     target_temp: 18.5
     cold_tolerance: 0.3
@@ -127,7 +127,7 @@ climate:
     heater: input_boolean.bedroom_trv_open
     target_sensor: sensor.bedroom_temperature_sensor_temperature
     min_temp: 10
-    max_temp: 21
+    max_temp: 24
     ac_mode: false
     target_temp: 18
     cold_tolerance: 0.1
@@ -142,7 +142,7 @@ climate:
     heater: input_boolean.spare_bedroom_trv_open
     target_sensor: sensor.spare_bedroom_temperature_sensor_temperature
     min_temp: 10
-    max_temp: 21
+    max_temp: 24
     ac_mode: false
     target_temp: 18
     cold_tolerance: 0.1

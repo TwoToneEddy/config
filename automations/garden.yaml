@@ -1,0 +1,33 @@
+- id: "turn_on_shed_fan"
+  alias: Turn on shed fan
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - schedule.shed_fan_schedule
+      from:
+      to: "on"
+  condition: []
+  action:
+    - service: switch.turn_on
+      target:
+        entity_id: switch.hive_plug
+      data: {}
+  mode: single
+
+- id: "turn_off_shed_fan"
+  alias: Turn off shed fan
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - schedule.shed_fan_schedule
+      from:
+      to: "off"
+  condition: []
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id: switch.hive_plug
+      data: {}
+  mode: single

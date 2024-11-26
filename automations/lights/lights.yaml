@@ -1,0 +1,16 @@
+- id: 'bedroom_lights_on_evening'
+  alias: Bedroom lights on evening
+  description: ''
+  trigger:
+  - platform: time
+    at: '20:00:00'
+  condition: []
+  action:
+  - service: light.turn_on
+    target:
+      entity_id:
+      - light.bedroom_bedside_light_lee
+      - light.bedroom_bedside_light_kiera
+    data: 
+      brightness_pct: "{{ states('sensor.bedroom_light_brightness') }}"
+  mode: single

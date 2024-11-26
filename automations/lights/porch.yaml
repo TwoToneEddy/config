@@ -1,0 +1,54 @@
+- id: "1695996225453"
+  alias: Porch Light On Before Work
+  description: ""
+  trigger:
+    - platform: time
+      at: 05:45:00
+  condition:
+    - condition: and
+      conditions:
+        - condition: sun
+          before: sunrise
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.porch_light
+      data:
+        brightness_pct: 50
+  mode: single
+
+- id: "1695996449552"
+  alias: Porch Light Off at Sunrise
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunrise
+  condition: []
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.porch_light
+      data: {}
+  mode: single
+
+- id: "1695996718802"
+  alias: Porch Light On At Sunset
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: 0
+  condition: []
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.porch_light
+      data:
+        brightness_pct: 50
+  mode: single
