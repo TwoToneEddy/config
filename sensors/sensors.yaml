@@ -5,6 +5,8 @@
         value_template: "{{ state_attr('climate.heater_heat','hvac_action') }}"
       polly_trv_sp:
         value_template: "{{ state_attr('climate.polly_trv','temperature') }}C"
+      outside_temp:
+        value_template: "{{ state_attr('weather.forecast_home','temperature') }}"
   - platform: systemmonitor
     resources:
       - type: processor_temperature

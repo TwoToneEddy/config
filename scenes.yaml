@@ -69,19 +69,19 @@
       - color_temp
       - xy
       color_mode: color_temp
-      brightness: 153
-      color_temp_kelvin: 2202
-      color_temp: 454
+      brightness: 102
+      color_temp_kelvin: 2801
+      color_temp: 357
       hs_color:
-      - 29.79
-      - 84.553
+      - 28.185
+      - 62.588
       rgb_color:
       - 255
-      - 146
-      - 39
+      - 170
+      - 95
       xy_color:
-      - 0.579
-      - 0.388
+      - 0.516
+      - 0.386
       effect:
       entity_id:
       - light.fire_light_1
@@ -145,19 +145,19 @@
       - color_temp
       - xy
       color_mode: color_temp
-      brightness: 82
-      color_temp_kelvin: 2202
-      color_temp: 454
+      brightness: 51
+      color_temp_kelvin: 2801
+      color_temp: 357
       hs_color:
-      - 29.79
-      - 84.553
+      - 28.185
+      - 62.588
       rgb_color:
       - 255
-      - 146
-      - 39
+      - 170
+      - 95
       xy_color:
-      - 0.579
-      - 0.388
+      - 0.516
+      - 0.386
       effect:
       entity_id:
       - light.fire_light_1

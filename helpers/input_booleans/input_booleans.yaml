@@ -56,3 +56,13 @@ wake_up_routine_complete:
   name: wake up routine complete
   icon: mdi:sun-compass
   initial: off
+
+enable_yuki_heater:
+  name: Enable Yuki Heater
+  icon: mdi:cat
+  initial: on
+
+enable_yuki_heater_override:
+  name: Enable Yuki Heater override
+  icon: mdi:cat
+  initial: off

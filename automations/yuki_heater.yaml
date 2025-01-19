@@ -1,0 +1,51 @@
+- id: "yuki_heater_on_automation"
+  alias: Yuki Heater On Automation
+  description: ""
+  trigger:
+    - platform: time_pattern
+      minutes: "1"
+  condition:
+    - condition: or
+      conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: input_boolean.enable_yuki_heater
+          state: 'on'
+        - condition: state
+          entity_id: schedule.yuki_heater_schedule
+          state: 'on'
+      - condition: state
+        entity_id: input_boolean.enable_yuki_heater_override
+        state: 'on'
+  action:
+    - type: turn_off
+      device_id: 1860d7b68b3ac2f8fb21eb33a002256e
+      entity_id: 60d2142a332cdabc48a9138d319512c3
+      domain: switch
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+    - type: turn_on
+      device_id: 1860d7b68b3ac2f8fb21eb33a002256e
+      entity_id: 60d2142a332cdabc48a9138d319512c3
+      domain: switch
+  mode: single
+
+- id: "yuki_heater_off_automation"
+  alias: Yuki Heater Off Automation
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - schedule.yuki_heater_schedule
+      to: "off"
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 1860d7b68b3ac2f8fb21eb33a002256e
+      entity_id: 60d2142a332cdabc48a9138d319512c3
+      domain: switch
+  mode: single

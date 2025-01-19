@@ -7,7 +7,7 @@
         {% if (now().hour < 8) %}
           15
         {% elif (now().hour >= 8) and (now().hour < 20) %}
-          21
+          20
         {% elif (now().hour >= 20) %}
           18
         {% endif %}
