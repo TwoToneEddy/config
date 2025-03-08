@@ -6,11 +6,11 @@
     input:
       controller: Spare bedroom dimmer
       on_released:
-        - service: light.toggle
-          target:
-            entity_id: light.spare_bedroom_wall_light
+        - action: wake_on_lan.send_magic_packet
+          metadata: {}
           data:
-            brightness_pct: "{{ states('sensor.spare_bedroom_light_brightness') }}"
+            broadcast_port: 9
+            mac: 10-7C-61-47-DD-28
       up_pressed: []
       up_released:
         - service: light.turn_on
