@@ -6,14 +6,20 @@
       entity_id:
         - sensor.heating_state
       from: heating
-      to: "off"
+      to:
   condition: []
   action:
-    - service: light.toggle
+    - service: input_boolean.turn_off
       target:
-        entity_id: light.spare_bedroom_wall_light
-      data:
-        brightness_pct: "{{ states('sensor.spare_bedroom_light_brightness') }}"
+        entity_id: input_boolean.activate_water_schedule
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 30
+        milliseconds: 0
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.activate_water_schedule
   mode: single
 
 # Sends a boost command for hot water

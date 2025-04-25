@@ -69,35 +69,75 @@
   name: Living Room Dim
   entities:
     light.living_room_wall_light_left:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
       effect_list:
       - blink
       - breathe
-      - okay
       - channel_change
       - finish_effect
+      - okay
       - stop_effect
       supported_color_modes:
-      - brightness
+      - color_temp
       effect:
-      color_mode: brightness
-      brightness: 76
-      friendly_name: Living Room Wall Light (Left)
+      color_mode: color_temp
+      brightness: 178
+      color_temp_kelvin: 2702
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 167
+      - 88
+      xy_color:
+      - 0.524
+      - 0.388
+      entity_id:
+      - light.living_room_wall_left_1
+      - light.living_room_wall_left_2
+      icon: mdi:lightbulb-group
+      friendly_name: Living room wall light (left)
       supported_features: 44
       state: 'on'
     light.living_room_wall_light_right:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
       effect_list:
       - blink
       - breathe
-      - okay
       - channel_change
       - finish_effect
+      - okay
       - stop_effect
       supported_color_modes:
-      - brightness
+      - color_temp
       effect:
-      color_mode: brightness
-      brightness: 76
-      friendly_name: Living Room Wall Light (Right)
+      color_mode: color_temp
+      brightness: 178
+      color_temp_kelvin: 2702
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 167
+      - 88
+      xy_color:
+      - 0.524
+      - 0.388
+      entity_id:
+      - light.living_room_wall_right_1
+      - light.living_room_wall_right_2
+      icon: mdi:lightbulb-group
+      friendly_name: Living room wall light (right)
       supported_features: 44
       state: 'on'
     light.fire_dimmer:
@@ -116,35 +156,68 @@
   name: Living Room TV Lighting
   entities:
     light.living_room_wall_light_left:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
       effect_list:
       - blink
       - breathe
-      - okay
       - channel_change
       - finish_effect
+      - okay
       - stop_effect
       supported_color_modes:
-      - brightness
+      - color_temp
+      effect:
       color_mode:
       brightness:
-      effect:
-      friendly_name: Living Room Wall Light (Left)
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      entity_id:
+      - light.living_room_wall_left_1
+      - light.living_room_wall_left_2
+      icon: mdi:lightbulb-group
+      friendly_name: Living room wall light (left)
       supported_features: 44
       state: 'off'
     light.living_room_wall_light_right:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
       effect_list:
       - blink
       - breathe
-      - okay
       - channel_change
       - finish_effect
+      - okay
       - stop_effect
       supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 13
+      - color_temp
       effect:
-      friendly_name: Living Room Wall Light (Right)
+      color_mode: color_temp
+      brightness: 13
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      entity_id:
+      - light.living_room_wall_right_1
+      - light.living_room_wall_right_2
+      icon: mdi:lightbulb-group
+      friendly_name: Living room wall light (right)
       supported_features: 44
       state: 'on'
     light.fire_dimmer:

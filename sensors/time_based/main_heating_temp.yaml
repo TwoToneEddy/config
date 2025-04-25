@@ -4,14 +4,29 @@
     sensors:
       main_heating_temp:
         value_template: >
-          {% if (now().hour < 5) %}
-            17
-          {% elif (now().hour >= 5) and (now().hour < 7) %}
-            20.5
-          {% elif (now().hour >= 7) and (now().hour < 17) %}
-            20.5
-          {% elif (now().hour >= 17) and (now().hour < 22) %}
-            20.5
-          {% elif (now().hour >= 22) %}
-            17
+          {% set hour = now().hour %}
+          {% set weekday = now().weekday() < 5 %}
+
+          {% if weekday %}
+            {% if hour < 5 %}
+              17
+            {% elif hour < 7 %}
+              20.5
+            {% elif hour < 17 %}
+              20.5
+            {% elif hour < 22 %}
+              20.5
+            {% else %}
+              17
+            {% endif %}
+          {% else %}
+            {% if hour < 7 %}
+              17
+            {% elif hour < 17 %}
+              20.5
+            {% elif hour < 22 %}
+              20.5
+            {% else %}
+              17
+            {% endif %}
           {% endif %}
